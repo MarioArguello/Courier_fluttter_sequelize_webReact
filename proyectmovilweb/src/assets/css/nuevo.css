@@ -1,0 +1,60 @@
+.center{
+    position: relative;
+    top: 40px; left: 350px;
+    width: 300px;
+  }
+  .tiporancho {
+    margin:5px auto 40px auto;	
+    border:5px solid rgb(134, 11, 11);
+    overflow: hidden;
+    height:60px;
+    width: 260px;
+    position:absolute;
+    top: 130px; left: 800px;
+ }
+ 
+ select {
+    border: none;
+    font-size: 17px;
+    height: 50px;
+    padding: 5px;
+    width: 250px;
+ }
+ select:focus{ outline: none;}
+ 
+ .tiporancho::after{
+     content:"\025be";
+     display:table-cell;
+     padding-top:7px;
+     text-align:center;
+     width:40px;
+     height:50px;
+     background-color:#d9d9d9;
+     position:absolute;
+     top:0;
+     right:0px;	
+     pointer-events: none;
+ }
+/* Select menu*/
+ .menu {
+    margin:5px auto 40px auto;	
+    border:5px solid rgb(134, 11, 11);
+    height:60px;
+    overflow: hidden;
+    width: 260px;
+    position:absolute;
+    top: 130px; left: 1300px;
+ }
+ .menu::after{
+    content:"\025be";
+    display:table-cell;
+    padding-top:7px;
+    text-align:center;
+    width:40px;
+    height:50px;
+    background-color:#d9d9d9;
+    position:absolute;
+    top:0;
+    right:0px;	
+    pointer-events: none;
+}
