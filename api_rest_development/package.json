@@ -1,0 +1,26 @@
+{
+  "name": "vcsgye",
+  "version": "1.0.0",
+  "description": "Sistma de Informacion para la Gestion de la Vinculacion con la Sociedad.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "vcs",
+    "gye"
+  ],
+  "author": "Alan",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.11.0"
+  }
+}
