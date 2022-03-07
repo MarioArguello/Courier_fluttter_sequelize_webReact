@@ -1,0 +1,138 @@
+database: courier
+shema  : proyect_courier
+
+INSERT INTO proyect_courier.rol ("nombre","estado")
+VALUES ('Admin','A'),('Cliente','A');
+
+/*==============================================================*/
+/* Table: PERSONA                                               */
+/*==============================================================*/
+create table proyect_courier.PERSONA (
+   IDPERSONA            SERIAL               not null,
+   NOMBRES              VARCHAR(100)         not null,
+   TELEFONO             VARCHAR(15)          not null,
+   CORREO               VARCHAR(20)          not null,
+   DNI                  VARCHAR(10)          not null,
+   ESTADO               CHAR                 not null,
+   UTC                  TIMESTAMP DEFAULT NOW(),
+   constraint PK_PERSONA primary key (IDPERSONA)
+);
+
+/*==============================================================*/
+/* Index: AK1_PERSONA                                           */
+/*==============================================================*/
+create unique index AK1_PERSONA on proyect_courier.PERSONA (
+IDPERSONA
+);
+
+
+/*==============================================================*/
+/* Index: AK3_PERSONA                                           */
+/*==============================================================*/
+create  index AK3_PERSONA on proyect_courier.PERSONA (
+IDPERSONA,
+ESTADO
+);
+
+/*==============================================================*/
+/* Index: AK4_PERSONA                                           */
+/*==============================================================*/
+create index AK4_PERSONA on proyect_courier.PERSONA (
+DNI
+);
+/*==============================================================*/
+/* Table: USUARIO                                               */
+/*==============================================================*/
+create table proyect_courier.USUARIO (
+   IDUSUARIO            SERIAL               not null,
+   IDPERSONA            INT4                 not null,
+   IDROL          		INT4                 not null,
+   USERNAME             VARCHAR(100)          not null,
+   PASSWORD             VARCHAR(500)         not null,
+   ESTADO               CHAR                 null,
+   UTC                  TIMESTAMP DEFAULT NOW(),
+   constraint PK_USUARIO primary key (IDUSUARIO)
+);
+
+/*==============================================================*/
+/* Index: AK1_USUARIO                                           */
+/*==============================================================*/
+create unique index AK1_USUARIO on proyect_courier.USUARIO (
+IDUSUARIO,
+IDROL
+);
+
+/*==============================================================*/
+/* Index: AK2_USUARIO                                           */
+/*==============================================================*/
+create  index AK2_USUARIO on proyect_courier.USUARIO (
+IDPERSONA,
+ESTADO
+);
+
+/*==============================================================*/
+/* Table: ROL                                                   */
+/*==============================================================*/
+create table proyect_courier.ROL (
+   IDROL                SERIAL               not null,
+   NOMBRE               VARCHAR(50)          not null,
+   ESTADO               CHAR                 not null,
+   UTC                  TIMESTAMP DEFAULT NOW(),
+   constraint PK_ROL primary key (IDROL)
+);
+
+/*==============================================================*/
+/* Index: AK1_ROL                                               */
+/*==============================================================*/
+create unique index AK1_ROL on proyect_courier.ROL (
+IDROL
+);
+
+/*==============================================================*/
+/* Index: AK2_ROL                                               */
+/*==============================================================*/
+create  index AK2_ROL on proyect_courier.ROL (
+NOMBRE,
+ESTADO
+);
+/*==============================================================*/
+/* Table: PEDIDOS                                               */
+/*==============================================================*/
+create table proyect_courier.PEDIDOS (
+   IDPEDIDOS            SERIAL               not null,
+   IDPERSONA			INT4                 not null,
+   UTC                  TIMESTAMP DEFAULT NOW(),
+   SHIPPER               VARCHAR(50)          not null,
+   CONSIGNEE               VARCHAR(50)           not null,
+   CARRIER               VARCHAR(50)           not null,
+   TRACKING               VARCHAR(50)           not null,
+   VALORCOMPRA            DECIMAL(5,4)           not null,
+   DETALLECOMPRA              VARCHAR(50)           not null,
+   ESTADO 			CHAR     not null,
+   constraint PK_PEDIDOS primary key (IDPEDIDOS)
+);
+
+/*==============================================================*/
+/* Index: AK1_PEDIDOS                                           */
+/*==============================================================*/
+create unique index AK1_PEDIDOS on proyect_courier.PEDIDOS (
+IDPEDIDOS,
+IDPERSONA
+);
+
+
+
+alter table proyect_courier.PEDIDOS
+   add constraint FK_PEDIDOS_PERSONA foreign key (IDPERSONA)
+      references proyect_courier.PERSONA (IDPERSONA)
+      on delete restrict on update restrict;
+
+alter table proyect_courier.USUARIO
+   add constraint FK_USUARIO_PERSONA foreign key (IDPERSONA)
+      references proyect_courier.PERSONA (IDPERSONA)
+      on delete restrict on update restrict;
+	  
+alter table proyect_courier.USUARIO
+   add constraint FK_USUARIO_ROL foreign key (IDROL)
+      references proyect_courier.ROL (IDROL)
+      on delete restrict on update restrict;
