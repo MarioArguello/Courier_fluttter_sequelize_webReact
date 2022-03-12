@@ -11,7 +11,7 @@ create table proyect_courier.PERSONA (
    IDPERSONA            SERIAL               not null,
    NOMBRES              VARCHAR(100)         not null,
    TELEFONO             VARCHAR(15)          not null,
-   CORREO               VARCHAR(20)          not null,
+   CORREO               VARCHAR(100)          not null,
    DNI                  VARCHAR(10)          not null,
    ESTADO               CHAR                 not null,
    UTC                  TIMESTAMP DEFAULT NOW(),
@@ -106,9 +106,10 @@ create table proyect_courier.PEDIDOS (
    CONSIGNEE               VARCHAR(50)           not null,
    CARRIER               VARCHAR(50)           not null,
    TRACKING               VARCHAR(50)           not null,
-   VALORCOMPRA            DECIMAL(5,4)           not null,
+   VALORCOMPRA            NUMERIC(5,2)           not null,
    DETALLECOMPRA              VARCHAR(50)           not null,
    ESTADO 			CHAR     not null,
+   FOTO			VARCHAR(150) not null,
    constraint PK_PEDIDOS primary key (IDPEDIDOS)
 );
 
